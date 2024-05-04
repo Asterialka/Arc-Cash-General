@@ -1,25 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Определение enum для списков
-typedef enum {
-    T1,
-    T2,
-    B1,
-    B2
-} ListType;
+#include "hash.h"
 
-// Определение структуры элемента хэш-таблицы
-typedef struct HashItem {
-    int key;
-    ListType value;
-} HashItem;
-
-// Определение структуры хэш-таблицы
-typedef struct HashTable {
-    HashItem** items;
-    int capacity;
-} HashTable;
 
 // Функция для создания нового элемента хэш-таблицы
 HashItem* newHashItem(int key, ListType value) {
@@ -57,5 +40,26 @@ void printHashTable(HashTable* table) {
         }
     }
     printf("\n");
+}
+
+// Функция для обновления значения элемента в хэш-таблице
+void hashTableUpdate(HashTable* table, int key, ListType newValue) {
+    int index = key % table->capacity;
+    HashItem* item = table->items[index];
+    if (item != NULL && item->key == key) {
+        item->value = newValue;
+    } else {
+        printf("Ключ %d не найден в хэш-таблице\n", key);
+    }
+}
+
+ListType getHashTableValue(HashTable* table, int key)
+{
+    int index = key % table->capacity;
+    if(table->items[index] != NULL && table->items[index]->key == key)
+    {
+        return table->items[index]->value;
+    }
+    return ListType();
 }
 

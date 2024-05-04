@@ -32,13 +32,19 @@ int main() {
 
     hashTableAdd(table, 3, T2);
 
-
+    printHashTable(table);
 
     find_element(listT1, 2, "T1");
     delete_element(listT1, 2);
 
+    pushFront(listT2, 2);
+
+    hashTableUpdate(table, 2, T2);
+
     print_lists(listT1, listT2, listB1, listB2);
 
+    int test = getHashTableValue(table, 2);
+    printf("Полученное значение по ключу = %d \n", test);
 
     printHashTable(table);
 

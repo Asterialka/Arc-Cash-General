@@ -101,7 +101,7 @@ void print_list(LinkedList* list) {
     }
 }
 
-void find_element(LinkedList* list, int value, char* listName) {
+void find_element(LinkedList* list, int value, const char* listName) {
     node* current = list->head;
     while (current != NULL) {
         if (current->val == value) {
