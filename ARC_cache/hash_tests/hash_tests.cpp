@@ -86,6 +86,50 @@ void test_removal()
     free_HASH(hash_table);
 }
 
+// Тест для проверки поведения при попытке добавления элементов в полностью заполненную таблицу
+
+void test_full_table()
+{
+    const int capacity = 10;
+    Hash* hash_table = create_HASH_TABLE(capacity);
+    // Добавляем capacity элементов
+    for (int i = 0; i < capacity; ++i)
+    {
+        hashTableAdd(hash_table, NULL, i);
+    }
+    // Попытка добавления еще одного элемента
+    assert(hashTableAdd(hash_table, NULL, capacity + 1) == NULL);
+    free_HASH(hash_table);
+}
+
+
+// Тест для проверки поведения при попытке поиска несуществующего элемента
+void test_search_non_existing()
+{
+    Hash* hash_table = create_HASH_TABLE(10);
+    // Поиск несуществующего элемента
+    assert(find_element_in_hash(hash_table, 100) == NULL);
+    free_HASH(hash_table);
+}
+
+// Тест для проверки поведения при попытке удаления несуществующего элемента
+void test_delete_non_existing()
+{
+    Hash* hash_table = create_HASH_TABLE(10);
+    // Попытка удаления несуществующего элемента
+    hash_delete_elem(100, hash_table);
+    free_HASH(hash_table);
+}
+
+// Тест для проверки работы с пустой таблицей
+void test_empty_table()
+{
+    Hash* hash_table = create_HASH_TABLE(10);
+    // Попытка удаления элемента из пустой таблицы
+    hash_delete_elem(100, hash_table);
+    free_HASH(hash_table);
+}
+
 int main()
 {
     const int num_numbers = 10000;
@@ -99,6 +143,10 @@ int main()
     test_hash_collisions();
     test_overwrite_values();
     test_removal();
+    test_full_table();
+    test_search_non_existing();
+    test_delete_non_existing();
+    test_empty_table();
 
     free_HASH(hash_table);
 
