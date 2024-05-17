@@ -1,59 +1,48 @@
 #ifndef HASH_TABLE
 #define HASH_TABLE
 
-
 typedef struct hashnode hashnode;
 typedef struct Hash Hash;
 typedef struct node node;
-typedef struct LinkedList LinkedList;
 
 struct node
 {
-	int val;
-	node * next;
-	node * prev;
+    int val;
+    node *next;
+    node *prev;
 };
-
-struct LinkedList
-{
-	int size;
-	int now_size;
-	node * head;
-	node * tail;
-};
-
-
 
 struct hashnode
 {
-	int value;
-	node * point;
-	hashnode * next;
-	hashnode * prev;
+    int value;
+    node *point;
+    hashnode *next;
+    hashnode *prev;
 };
 
 struct Hash
 {
-	int capacity;
-	hashnode **array;
+    int capacity;
+    hashnode **array;
 };
 
-//create hashnode
+// create hashnode
 hashnode* create_hashnode(int value, node *point, hashnode *prev);
-//create array
+// create array
 hashnode **init_array(int capacity);
-//create hashtable
+// create hashtable
 Hash* create_HASH_TABLE(int capacity);
-//add node to hash
+// add node to hash
 Hash* hashTableAdd(Hash *table, node *point, int value);
-//search for element in hashtable
+// search for element in hashtable
 hashnode* find_element_in_hash(Hash *hash, int page);
-//hash function
+// hash function
 int hash_function(int value, Hash *table);
-//free the hash branch
-Hash* free_the_branch(hashnode *tmp);
-//free hash table
+// free the hash branch
+void free_the_branch(hashnode *tmp);
+// free hash table
 void free_HASH(Hash *hash);
-//delete element from hash table
+// delete element from hash table
 void hash_delete_elem(int page, Hash *s);
+
 #endif
