@@ -34,7 +34,7 @@ Hash* create_HASH_TABLE(int capacity)
     return our_hash;
 }
 
-// Функция для добавления элемента в хэш-таблицу
+
 // Функция для добавления элемента в хэш-таблицу
 Hash* hashTableAdd(Hash *table, node *point, int value)
 {
@@ -46,7 +46,6 @@ Hash* hashTableAdd(Hash *table, node *point, int value)
     {
         if (tmp->value == value)
         {
-            // Если элемент найден, обновляем его данные и завершаем функцию
             tmp->point = point;
             return table;
         }
@@ -67,10 +66,29 @@ Hash* hashTableAdd(Hash *table, node *point, int value)
         }
         tmp->next = create_hashnode(value, point, tmp);
     }
+
+    // Проверяем, что таблица не полностью заполнена
+    int num_elements = 0;
+    for (int i = 0; i < table->capacity; ++i)
+    {
+        hashnode *cur = table->array[i];
+        while (cur != NULL)
+        {
+            num_elements++;
+            cur = cur->next;
+        }
+    }
+    if (num_elements > table->capacity)
+    {
+
+        return NULL;
+    }
+
     return table;
 }
 
-// ищем элемент в хэш таблице
+
+// Ищем элемент в хэш таблице
 hashnode* find_element_in_hash(Hash *hash, int page)
 {
     int pl = hash_function(page, hash);
@@ -86,13 +104,13 @@ hashnode* find_element_in_hash(Hash *hash, int page)
     return NULL; // Возвращаем NULL, если элемент не найден
 }
 
-// hash-function
+// Hash-function
 int hash_function(int value, Hash *table)
 {
     return value % table->capacity;
 }
 
-// освобождение элементов ветки
+// Освобождение элементов ветки
 void free_the_branch(hashnode *tmp)
 {
     if (tmp == NULL)
@@ -103,7 +121,7 @@ void free_the_branch(hashnode *tmp)
     free(tmp);
 }
 
-// print hash
+// Print_hash
 void print_hash(Hash *hash)
 {
     if (hash)
