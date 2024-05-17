@@ -130,6 +130,20 @@ void print_hash(Hash *hash)
 		}
 	}
 }
+void free_HASH(Hash *hash)
+{
+	for (int i = 0; i < hash->capacity; i++)
+	{
+		hashnode *tmp = hash->array[i];
+		if (tmp != NULL)
+		{
+			free_the_branch(tmp);
+		}
+	}
+
+	free(hash->array);
+	free(hash);
+}
 void hash_delete_elem(int page, Hash *s)
 {
 	hashnode * h_node;
