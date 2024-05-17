@@ -4,6 +4,23 @@
 
 typedef struct hashnode hashnode;
 typedef struct Hash Hash;
+typedef struct node node;
+typedef struct LinkedList LinkedList;
+
+struct node
+{
+	int val;
+	node * next;
+	node * prev;
+};
+
+struct LinkedList
+{
+	int size;
+	int now_size;
+	node * head;
+	node * tail;
+};
 
 
 
