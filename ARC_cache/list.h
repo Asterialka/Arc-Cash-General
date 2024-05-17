@@ -23,8 +23,8 @@ struct LinkedList
 node* create_node();
 LinkedList* List(int size);
 void list_free(LinkedList **list);
-void pushFront(LinkedList *list, int data);
-void popBack(LinkedList *list);
+void push_front(LinkedList *list, int data);
+void delete_back_element(LinkedList *list);
 void print_list(LinkedList* list);
 void find_element(LinkedList* list, int value, char* listName);
 void delete_element(LinkedList* list, int value);

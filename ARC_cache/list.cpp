@@ -40,7 +40,7 @@ void list_free(LinkedList **list)
 	(*list) = NULL;
 }
 
-void pushFront(LinkedList *list, int data)
+void push_front(LinkedList *list, int data)
 {
 	node *tmp = (node*) malloc(sizeof(node));
 	if (tmp == NULL)
@@ -66,30 +66,30 @@ void pushFront(LinkedList *list, int data)
 	list->now_size++;
 }
 
-void popBack(LinkedList *list)
+void delete_back_element(LinkedList *list)
 {
-	node * next;
 	if (list->tail == NULL)
 	{
-		exit(4);
+		printf("List is empty \n");
+		return;
 	}
 
-	next = list->tail;
-	list->tail = list->tail->prev;
-	if (list->tail)
+	node * next;
+	next = list->tail->prev;
+	free(list->tail);
+
+	list->tail = next;
+
+	if(list->tail != NULL)
 	{
 		list->tail->next = NULL;
 	}
-
-	if (next == list->head)
+	else
 	{
 		list->head = NULL;
 	}
-
-	free(next);
-
+	
 	list->now_size--;
-
 }
 
 
@@ -125,6 +125,7 @@ void delete_element(LinkedList* list, int value) {
                 prev->next = current->next;
             }
             free(current);
+			list->now_size--;
             return;
         }
         prev = current;
