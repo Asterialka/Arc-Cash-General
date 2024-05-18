@@ -5,7 +5,6 @@
 
 #include "list.h"
 
-//LIST
 node* create_node()
 {
 	node *new_node = (node*) malloc(sizeof(node));
@@ -43,11 +42,8 @@ void list_free(LinkedList **list)
 void push_front(LinkedList *list, int data)
 {
 	node *tmp = (node*) malloc(sizeof(node));
-	if (tmp == NULL)
-	{
-		exit(1);
-	}
-
+	assert(tmp != NULL);
+	
 	tmp->val = data;
 	tmp->next = list->head;
 	tmp->prev = NULL;
@@ -55,29 +51,21 @@ void push_front(LinkedList *list, int data)
 	{
 		list->head->prev = tmp;
 	}
-
 	list->head = tmp;
-
 	if (list->tail == NULL)
 	{
 		list->tail = tmp;
 	}
-
 	list->now_size++;
 }
 
 void delete_back_element(LinkedList *list)
 {
-	if (list->tail == NULL)
-	{
-		printf("List is empty \n");
-		return;
-	}
+	assert(list->tail != NULL);
 
 	node * next;
 	next = list->tail->prev;
 	free(list->tail);
-
 	list->tail = next;
 
 	if(list->tail != NULL)
@@ -88,7 +76,6 @@ void delete_back_element(LinkedList *list)
 	{
 		list->head = NULL;
 	}
-	
 	list->now_size--;
 }
 
@@ -101,17 +88,19 @@ void print_list(LinkedList* list) {
     }
 }
 
-void find_element(LinkedList* list, int value, const char* listName) {
+int find_element(LinkedList* list, int value, const char* listName) {
     node* current = list->head;
     while (current != NULL) {
         if (current->val == value) {
             printf("Элемент %d найден в списке %s\n", value, listName);
-            return;
+            return 1;
         }
         current = current->next;
     }
     printf("Элемент %d не найден в списке %s\n", value, listName);
+	return 0;
 }
+
 
 
 void delete_element(LinkedList* list, int value) {
@@ -131,5 +120,5 @@ void delete_element(LinkedList* list, int value) {
         prev = current;
         current = current->next;
     }
-    printf("Элемент не найден\n");
+    printf("The element was not found\n");
 }

@@ -19,14 +19,13 @@ struct LinkedList
 	node * tail;
 };
 
-//LIST
 node* create_node();
 LinkedList* List(int size);
+int find_element(LinkedList* list, int value, char* listName);
 void list_free(LinkedList **list);
 void push_front(LinkedList *list, int data);
 void delete_back_element(LinkedList *list);
 void print_list(LinkedList* list);
-void find_element(LinkedList* list, int value, char* listName);
 void delete_element(LinkedList* list, int value);
 
 #endif
