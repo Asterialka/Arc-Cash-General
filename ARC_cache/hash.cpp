@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <math.h>
 #include "hash.h"
 
 // узел в хэш-таблице
@@ -35,11 +36,13 @@ Hash* create_HASH_TABLE(int capacity)
 }
 
 
+
 // Функция для добавления элемента в хэш-таблицу
-Hash* hashTableAdd(Hash *table, node *point, int value)
+Hash* hashTableAdd(Hash* table, node* point, int value)
 {
     int index = hash_function(value, table);
-    hashnode *tmp = table->array[index];
+    //printf("Adding value %d at index %d\n", value, index);
+    hashnode* tmp = table->array[index];
 
     // Проверяем, есть ли уже элемент с таким ключом в таблице
     while (tmp != NULL)
@@ -47,6 +50,7 @@ Hash* hashTableAdd(Hash *table, node *point, int value)
         if (tmp->value == value)
         {
             tmp->point = point;
+            //printf("Value %d already in table, updating point.\n", value);
             return table;
         }
         tmp = tmp->next;
@@ -56,18 +60,28 @@ Hash* hashTableAdd(Hash *table, node *point, int value)
     tmp = table->array[index];
     if (tmp == NULL)
     {
+        //printf("Creating first hashnode for value %d at index %d.\n", value, index);
         table->array[index] = create_hashnode(value, point, NULL);
     }
     else
     {
+        //printf("Appending new hashnode for value %d at index %d.\n", value, index);
         while (tmp->next != NULL)
         {
             tmp = tmp->next;
         }
         tmp->next = create_hashnode(value, point, tmp);
+        tmp->next->prev = tmp; // Обновляем указатель на предыдущий элемент
+        //printf("Value %d added to the end of the chain at index %d.\n", value, index);
     }
 
-    // Проверяем, что таблица не полностью заполнена
+    return table;
+}
+
+
+// Функция для проверки заполненности таблицы
+/*int is_table_full(Hash *table)
+{
     int num_elements = 0;
     for (int i = 0; i < table->capacity; ++i)
     {
@@ -78,15 +92,9 @@ Hash* hashTableAdd(Hash *table, node *point, int value)
             cur = cur->next;
         }
     }
-    if (num_elements > table->capacity)
-    {
-
-        return NULL;
-    }
-
-    return table;
+    return num_elements >= table->capacity;
 }
-
+*/
 
 // Ищем элемент в хэш таблице
 hashnode* find_element_in_hash(Hash *hash, int page)
@@ -104,11 +112,14 @@ hashnode* find_element_in_hash(Hash *hash, int page)
     return NULL; // Возвращаем NULL, если элемент не найден
 }
 
+
 // Hash-function
-int hash_function(int value, Hash *table)
+int hash_function(int value, Hash* table)
 {
-    return value % table->capacity;
+    unsigned int positive_value = (unsigned int)value; // Преобразуем значение к unsigned
+    return positive_value % table->capacity; // Возвращаем неотрицательный индекс
 }
+
 
 // Освобождение элементов ветки
 void free_the_branch(hashnode *tmp)
