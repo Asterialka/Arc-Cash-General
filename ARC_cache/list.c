@@ -11,7 +11,7 @@ node* create_node()
 	return new_node;
 }
 
-LinkedList* List(int size)
+LinkedList* init_List(int size)
 {
 	LinkedList *list = NULL;
 	list = (LinkedList*) malloc((sizeof(LinkedList)));
