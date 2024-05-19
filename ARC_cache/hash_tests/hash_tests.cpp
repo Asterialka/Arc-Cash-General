@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <ctime>
-#include "hash.h"
+#include "hash_test.h"
 
 // Функция для загрузки чисел из файла
 void load_numbers_from_file(const char* filename, int* numbers, int max_count)
