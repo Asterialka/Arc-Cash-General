@@ -12,8 +12,8 @@
   - [Как использовать](#как-использовать)
   - [Зависимые объекты](#зависимые-объекты)
   - [Тесты](#тесты)
-  - [Дополнительные материалы](#дополнительные-материалы)
-  - [Над проектом работали]{#команда} 
+- [Дополнительные материалы](#дополнительные-материалы)
+- [Над проектом работали](#команда) 
 
 
 ## Описание
@@ -106,7 +106,7 @@ Time taken to delete 1000000 elements: 0.109000 seconds
 скачайте файлы из папки list_tests и основные list.cpp, list.h
 запустите исполняемый файл list-test.cpp 
 
-## Дополнительные материалы:
+# Дополнительные материалы:
 
 Для более детального изучения вы можете ознакомиться с следующими материалами:
 
@@ -116,7 +116,7 @@ Time taken to delete 1000000 elements: 0.109000 seconds
 - [Видео 2](https://www.youtube.com/watch?v=OJwaGdA8CU8)
 - [Видео 3](https://www.youtube.com/watch?v=zWcgccpVRfA&t=277s)
 
-## Команда:
+# Команда:
 - [@Popova Elizabeth](https://github.com/Ve-Po)
 - [@Lobachev Alexander](https://github.com/qwerfiko)
 - [@Shilov Artem](https://github.com/Asterialka)
