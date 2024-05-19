@@ -19,9 +19,7 @@ LinkedList* List(int size)
 	list->now_size = 0;
 	list->head = NULL;
 	list->tail = NULL;
-
 	return list;
-
 }
 
 void list_free(LinkedList **list)
@@ -34,7 +32,6 @@ void list_free(LinkedList **list)
 		free(tmp);
 		tmp = next;
 	}
-
 	free(*list);
 	(*list) = NULL;
 }
@@ -43,7 +40,6 @@ void push_front(LinkedList *list, int data)
 {
 	node *tmp = (node*) malloc(sizeof(node));
 	assert(tmp != NULL);
-	
 	tmp->val = data;
 	tmp->next = list->head;
 	tmp->prev = NULL;
@@ -62,12 +58,10 @@ void push_front(LinkedList *list, int data)
 void delete_back_element(LinkedList *list)
 {
 	assert(list->tail != NULL);
-
 	node * next;
 	next = list->tail->prev;
 	free(list->tail);
 	list->tail = next;
-
 	if(list->tail != NULL)
 	{
 		list->tail->next = NULL;
@@ -88,9 +82,10 @@ void print_list(LinkedList* list) {
     }
 }
 
-int find_element(LinkedList* list, int value, const char* listName) {
+int find_element(LinkedList* list, int value, const char* listName)
+{
     node* current = list->head;
-    while (current != NULL) {
+	while (current != NULL) {
         if (current->val == value) {
             printf("Элемент %d найден в списке %s\n", value, listName);
             return 1;
@@ -103,7 +98,8 @@ int find_element(LinkedList* list, int value, const char* listName) {
 
 
 
-void delete_element(LinkedList* list, int value) {
+void delete_element(LinkedList* list, int value)
+{
     node* current = list->head;
     node* prev = NULL;
     while (current != NULL) {
