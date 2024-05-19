@@ -22,21 +22,27 @@ LinkedList* List(int size)
 	return list;
 }
 
-void list_free(LinkedList **list)
+void list_free(LinkedList *list)
 {
-	node *tmp = (*list)->head;
-	node *next = NULL;
-	while (tmp)
-	{
-		next = tmp->next;
-		free(tmp);
-		tmp = next;
-	}
-	free(*list);
-	(*list) = NULL;
-}
+  if (list) {
+	  
+	  if ((list)->head) {
+	    node *tmp = (list)->head;
+	    node *next = NULL;
+	    while (tmp)
+	    {
+		    next = tmp->next;
+		    free(tmp);
+		    tmp = next;
+	    }
+	 
+	  }
+    free(list);
+    (list) = NULL;
+  }
 
-void push_front(LinkedList *list, int data)
+}
+void pushFront(LinkedList *list, int data)
 {
 	node *tmp = (node*) malloc(sizeof(node));
 	assert(tmp != NULL);
@@ -55,11 +61,10 @@ void push_front(LinkedList *list, int data)
 	list->now_size++;
 }
 
-void delete_back_element(LinkedList *list)
+void popBack(LinkedList *list)
 {
 	assert(list->tail != NULL);
-	node * next;
-	next = list->tail->prev;
+	node * next = list->tail->prev;
 	free(list->tail);
 	list->tail = next;
 	if(list->tail != NULL)
@@ -82,21 +87,59 @@ void print_list(LinkedList* list) {
     }
 }
 
-int find_element(LinkedList* list, int value, const char* listName)
-{
+node *find_element(LinkedList* list, long long int value) {
     node* current = list->head;
-	while (current != NULL) {
+    while (current != NULL) {
         if (current->val == value) {
-            printf("Элемент %d найден в списке %s\n", value, listName);
-            return 1;
+            //printf("Элемент %d найден в списке \n", value);
+            return current;
         }
         current = current->next;
     }
-    printf("Элемент %d не найден в списке %s\n", value, listName);
-	return 0;
+    return NULL;
 }
 
+void delete_by_point(node *point, LinkedList *list) {
+ if (point == NULL) {
+  return;
+  }
+  else {
+  
+    if (point->prev == NULL && point->next == NULL) {
+      list->head = list->tail = NULL;
+      free(point);
 
+      point = NULL;
+      list->now_size--;
+      return ;
+    }
+    if (point->prev == NULL) {
+      list->head = point->next;
+      point->next->prev = NULL;
+      free(point);
+      list->now_size--;
+      return;
+    
+    }
+    if (point->next == NULL) {
+      point->prev->next = NULL;
+      free(point);
+     
+      point = NULL;
+      list->now_size--;
+      return;
+  
+    }
+      point->prev->next = point->next;
+      point->next->prev = point->prev;
+      point->val = 0;
+      free(point);
+      point = NULL;
+      list->now_size--;
+    return ;
+  
+  }
+}
 
 void delete_element(LinkedList* list, int value)
 {
