@@ -1,4 +1,11 @@
-int min(int a, int b)
+#include <stdio.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <cache.h>
+
+
+
+long long int min(long long int a, long long int b)
 {
 	if (a > b)
 	{
@@ -10,7 +17,7 @@ int min(int a, int b)
 	}
 }
 
-int max(int a, int b)
+long long int max(long long int a, long long int b)
 {
 	if (a > b)
 	{
@@ -21,19 +28,6 @@ int max(int a, int b)
 		return b;
 	}
 }
-
-struct cache_ARC
-{
-	int size_ARC;	// size c 
-	LinkedList * T1;
-	LinkedList * B1;
-	LinkedList * T2;
-	LinkedList * B2;
-	int *p;	// parametr thar regul 
-	Hash * hash_ARC;	// hash_table size c
-	int hit;
-
-};
 
 //initializes ARC cache with size_of_cache
 cache_ARC* init_cache(int size_of_cache)
@@ -71,6 +65,7 @@ void free_cache(cache_ARC *cache)
 
 void ARC(cache_ARC *ARC, int page)
 {
+	assert(ARC->hash - ARC && ARC->T1 && ARC->T2 && ARC->B1 && ARC->B2 && "was given NULL pointer");
 	hashnode *tmp = find_element_in_hash(ARC->hash_ARC, page);
 	if (tmp != NULL)	//case 1
 	{
@@ -78,11 +73,11 @@ void ARC(cache_ARC *ARC, int page)
 		hash_delete_elem(page, ARC->hash_ARC);
 		if (find_element(ARC->T1, page) != NULL)
 		{
-			ARC->T1 = delete_by_point(ptr, ARC->T1);
+			delete_by_point(ptr, ARC->T1);
 		}
 		else
 		{
-			ARC->T2 = delete_by_point(ptr, ARC->T2);
+			delete_by_point(ptr, ARC->T2);
 		}
 
 		pushFront(ARC->T2, page);
@@ -96,7 +91,7 @@ void ARC(cache_ARC *ARC, int page)
 	{
 		*(ARC->p) = min(ARC->size_ARC, *(ARC->p) + max(ARC->B2->now_size / ARC->B1->now_size, 1));
 		replace(ARC, page);
-		ARC->B1 = delete_by_point(b1, ARC->B1);
+		delete_by_point(b1->point, ARC->B1);
 		pushFront(ARC->T2, page);
 		hashTableAdd(ARC->hash_ARC, ARC->T2->head, page, 2);
 
@@ -108,7 +103,7 @@ void ARC(cache_ARC *ARC, int page)
 	{
 		*(ARC->p) = max(0, *(ARC->p) - max(ARC->B1->now_size / ARC->B2->now_size, 1));
 		replace(ARC, page);
-		ARC->B2 = delete_by_point(b2, ARC->B2);
+		delete_by_point(b2->point, ARC->B2);
 		pushFront(ARC->T2, page);
 		hashTableAdd(ARC->hash_ARC, ARC->T2->head, page, 2);
 		return;
@@ -127,7 +122,6 @@ void ARC(cache_ARC *ARC, int page)
 				int page = ARC->T1->tail->val;
 				popBack(ARC->T1);
 				hash_delete_elem(page, ARC->hash_ARC);
-				printf("i");
 			}
 		}
 
@@ -149,8 +143,10 @@ void ARC(cache_ARC *ARC, int page)
 	}
 }
 
-void replace(cache_ARC *arc, int page)
+void replace(cache_ARC *arc, long long int page)
 {
+	assert((*arc->p != 0) && (*arc->p < arc->size_ARC) && "incorrect parament p in replace");
+	assert((arc->p != 0) && (arc->T1 != 0) && (arc->T2 != 0) && (arc->B1 != 0) && (arc->B2 != 0) && "Was given NULL pointer");
 	if ((arc->T1->now_size >= 1) && ((((find_element(arc->B2, page) != NULL) && (arc->T1->now_size == *(arc->p)) || (arc->T1->now_size > *(arc->p))))))
 	{
 		int page = arc->T1->tail->val;
