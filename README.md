@@ -62,7 +62,8 @@ long long int min(long long int a, long long int b);
 long long int max(long long int a, long long int b);
 void free_cache(cache_ARC *cache);
 ```
-Функции min и max возвращают минимальное и максимальное значение из двух переданных аргументов соответственно.
+Функции min и max возвращают минимальное и максимальное значение из двух переданных аргументов соответственно.  
+
 Функция освобождает память, занятую кэшем алгоритма ARC, включая списки T1, T2, B1, B2 и хеш-таблицу.
 
 ## Требования к среде
@@ -71,9 +72,11 @@ void free_cache(cache_ARC *cache);
 
 ## Как использовать
 
-скачайте файлы cash.cpp, hash.cpp, list.cpp и соответствующие header-файлы. 
+скачайте файлы cash.cpp, hash.cpp, list.cpp и соответствующие header-файлы.   
+
 настройте makefile для запуска программы или
-используйте компиляцию из командной строки
+используйте компиляцию из командной строки  
+
 ```bash
 g++ -o cash cash.cpp
 ``` 
@@ -87,8 +90,10 @@ GCC compilier, Makefile для сборки
 Убедитесь, что файлы находятся в одной директории и перейдите к соответствующему узлу cd, где хранятся файлы проекта
 
 ### Тесты хэш-таблицы: 
-скачайте файлы из папки hash_tests: hash_test.cpp и hash_test.h
-и основные файлы hash.cpp и hash.h. Затем скомпилируйте совместно:
+скачайте файлы из папки hash_tests: hash_test.cpp и hash_test.h  
+
+и основные файлы hash.cpp и hash.h. Затем скомпилируйте совместно:  
+
 ```bash
 g++ -o hash_program hash.cpp hash_tests.cpp
 ```
@@ -98,12 +103,16 @@ g++ -o hash_program hash.cpp hash_tests.cpp
 
 _Тесты производительности хэш-таблицы:_
 
-Time taken to add 1000000 elements: 0.110000 seconds
-Time taken to find 1000000 elements: 0.049000 seconds
-Time taken to delete 1000000 elements: 0.109000 seconds
+Time taken to add 1000000 elements: 0.110000 seconds  
+
+Time taken to find 1000000 elements: 0.049000 seconds  
+
+Time taken to delete 1000000 elements: 0.109000 seconds  
+
 
 ### Тесты двусвязного списка: 
-скачайте файлы из папки list_tests и основные list.cpp, list.h
+скачайте файлы из папки list_tests и основные list.cpp, list.h  
+
 запустите исполняемый файл list-test.cpp 
 
 # Дополнительные материалы:
