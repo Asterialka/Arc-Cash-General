@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <cache.h>
 
-
-
 long long int min(long long int a, long long int b)
 {
 	if (a > b)
@@ -29,19 +27,19 @@ long long int max(long long int a, long long int b)
 	}
 }
 
-//initializes ARC cache with size_of_cache
+/* initializes ARC cache with size_of_cache */
 cache_ARC* init_cache(int size_of_cache)
 {
 	assert(size_of_cache >= 0);
 	cache_ARC *cache = (cache_ARC*) malloc(sizeof(cache_ARC));
 	assert(cache);
-	cache->T1 = init_List(0, 1);	//init with 0 linked list
+	cache->T1 = init_List(0);	//init with 0 linked list
 	assert(cache->T1);
-	cache->T2 = init_List(0, 2);	//init with 0 linked list
+	cache->T2 = init_List(0);	//init with 0 linked list
 	assert(cache->T2);
-	cache->B1 = init_List(0, 3);	//init with 0 linked list
+	cache->B1 = init_List(0);	//init with 0 linked list
 	assert(cache->B1);
-	cache->B2 = init_List(0, 4);	//init with 0 linked list
+	cache->B2 = init_List(0);	//init with 0 linked list
 	assert(cache->B2);
 	cache->hash_ARC = create_HASH_TABLE(size_of_cache);	//size 2c
 	assert(cache->hash_ARC);
@@ -58,14 +56,14 @@ void free_cache(cache_ARC *cache)
 	list_free(cache->T2);
 	list_free(cache->B1);
 	list_free(cache->B2);
-	free_hash(cache->hash_ARC);
+	free_HASH(cache->hash_ARC);
 	free(cache);
 
 }
 
-void ARC(cache_ARC *ARC, int page)
+void ARC(cache_ARC *ARC, long long int page)
 {
-	assert(ARC->hash - ARC && ARC->T1 && ARC->T2 && ARC->B1 && ARC->B2 && "was given NULL pointer");
+	assert(ARC->hash_ARC && ARC->T1 && ARC->T2 && ARC->B1 && ARC->B2 && "was given NULL pointer");
 	hashnode *tmp = find_element_in_hash(ARC->hash_ARC, page);
 	if (tmp != NULL)	//case 1
 	{
@@ -74,14 +72,16 @@ void ARC(cache_ARC *ARC, int page)
 		if (find_element(ARC->T1, page) != NULL)
 		{
 			delete_by_point(ptr, ARC->T1);
+			printf("element was in t1\n");
 		}
 		else
 		{
 			delete_by_point(ptr, ARC->T2);
+			printf("element was in t2\n");
 		}
 
 		pushFront(ARC->T2, page);
-		hashTableAdd(ARC->hash_ARC, ARC->T2->head, page, 2);
+		hashTableAdd(ARC->hash_ARC, ARC->T2->head, page);
 		ARC->hit++;
 		return;
 	}
@@ -93,7 +93,8 @@ void ARC(cache_ARC *ARC, int page)
 		replace(ARC, page);
 		delete_by_point(b1->point, ARC->B1);
 		pushFront(ARC->T2, page);
-		hashTableAdd(ARC->hash_ARC, ARC->T2->head, page, 2);
+		hashTableAdd(ARC->hash_ARC, ARC->T2->head, page);
+		printf("element was in b1\n");
 
 		return;
 	}
@@ -105,7 +106,8 @@ void ARC(cache_ARC *ARC, int page)
 		replace(ARC, page);
 		delete_by_point(b2->point, ARC->B2);
 		pushFront(ARC->T2, page);
-		hashTableAdd(ARC->hash_ARC, ARC->T2->head, page, 2);
+		hashTableAdd(ARC->hash_ARC, ARC->T2->head, page);
+		printf("element was in b2\n");
 		return;
 	}
 	else
@@ -116,12 +118,14 @@ void ARC(cache_ARC *ARC, int page)
 			{
 				popBack(ARC->B1);
 				replace(ARC, page);
+				printf("case 1.1\n");
 			}
 			else
 			{
-				int page = ARC->T1->tail->val;
+				long long int page = ARC->T1->tail->val;
 				popBack(ARC->T1);
 				hash_delete_elem(page, ARC->hash_ARC);
+				printf("case 1.2\n");
 			}
 		}
 
@@ -129,6 +133,7 @@ void ARC(cache_ARC *ARC, int page)
 		{
 			if (((ARC->B1->now_size + ARC->T1->now_size) + (ARC->B2->now_size + ARC->T2->now_size)) == 2 *ARC->size_ARC)
 			{
+				printf("case 2.3\n");
 				if (ARC->B2->now_size != 0)
 				{
 					popBack(ARC->B2);
@@ -138,8 +143,10 @@ void ARC(cache_ARC *ARC, int page)
 			}
 		}
 
+		printf("new\n");
+
 		pushFront(ARC->T1, page);
-		hashTableAdd(ARC->hash_ARC, ARC->T1->head, page, 1);
+		hashTableAdd(ARC->hash_ARC, ARC->T1->head, page);
 	}
 }
 
