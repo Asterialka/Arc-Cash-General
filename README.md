@@ -114,10 +114,9 @@ Time taken to delete 1000000 elements: 0.109000 seconds
 - [Видео 2](https://www.youtube.com/watch?v=OJwaGdA8CU8)
 - [Видео 3](https://www.youtube.com/watch?v=zWcgccpVRfA&t=277s)
 
-```markdowm
+
 над проектом работали:
 - [@Popova Elizabeth](https://github.com/Ve-Po)
 - [@Lobachev Alexander](https://github.com/qwerfiko)
 - [@Shilov Artem](https://github.com/Asterialka)
 - [@Novikova Polina](https://github.com/Novpolina)
-```
