@@ -84,7 +84,8 @@ GCC compilier, Makefile для сборки
 ## Тесты
 Убедитесь, что файлы находятся в одной директории и перейдите к соответствующему узлу cd, где хранятся файлы проекта
 
-Тесты хэш-таблицы: скачайте файлы из папки hash_tests: hash_test.cpp и hash_test.h
+### Тесты хэш-таблицы: 
+скачайте файлы из папки hash_tests: hash_test.cpp и hash_test.h
 и основные файлы hash.cpp и hash.h. Затем скомпилируйте совместно:
 ```bash
 g++ -o hash_program hash.cpp hash_tests.cpp
@@ -93,10 +94,30 @@ g++ -o hash_program hash.cpp hash_tests.cpp
 
 файл generate_numbers создаёт текстовый файл numbers.txt c 10000 размером от 1 до 10000 для тестирования функций хэш-таблицы и производительности
 
-Тесты двусвязного списка: скачайте файлы из папки list_tests и основные list.cpp, list.h
+_Тесты производительности хэш-таблицы:_
+
+Time taken to add 1000000 elements: 0.110000 seconds
+Time taken to find 1000000 elements: 0.049000 seconds
+Time taken to delete 1000000 elements: 0.109000 seconds
+
+### Тесты двусвязного списка: 
+скачайте файлы из папки list_tests и основные list.cpp, list.h
 запустите исполняемый файл list-test.cpp 
 
+## Дополнительные материалы и литература
 
- 
+Для более детального изучения вы можете ознакомиться с следующими материалами:
 
+- [Статьи исследовательского центра IBM по алгоритму ARC](https://web.archive.org/web/20100329071954/http://www.almaden.ibm.com/StorageSystems/projects/arc/)
+- [Статья на Википедии об алгоритме ARC](https://en.wikipedia.org/wiki/Adaptive_replacement_cache)
+- [Видео 1](https://www.youtube.com/watch?v=_XDHPhdQHMQ)
+- [Видео 2](https://www.youtube.com/watch?v=OJwaGdA8CU8)
+- [Видео 3](https://www.youtube.com/watch?v=zWcgccpVRfA&t=277s)
 
+```markdowm
+над проектом работали:
+- [@Popova Elizabeth](https://github.com/Ve-Po)
+- [@Lobachev Alexander](https://github.com/qwerfiko)
+- [@Shilov Artem](https://github.com/Asterialka)
+- [@Novikova Polina](https://github.com/Novpolina)
+```
