@@ -20,12 +20,13 @@ struct LinkedList
 };
 
 node* create_node();
-LinkedList* List(int size);
+LinkedList* init_List(int size);
 int find_element(LinkedList* list, int value, char* listName);
-void list_free(LinkedList **list);
-void push_front(LinkedList *list, int data);
+void list_free(LinkedList *list);
+void pushFront(LinkedList *list, int data);
 void delete_back_element(LinkedList *list);
 void print_list(LinkedList* list);
 void delete_element(LinkedList* list, int value);
+void delete_by_point(node *point, LinkedList *list);
 
 #endif
