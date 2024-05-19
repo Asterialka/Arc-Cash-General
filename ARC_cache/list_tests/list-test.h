@@ -12,4 +12,10 @@
 
 #define SIZE_NUMBER 3
 
+void test1();
+void test2();
+void test3();
+void test4();
+void test5();
+
 #endif
