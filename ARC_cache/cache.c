@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
-#include <cache.h>
+
+#include "cache.h"
 
 long long int min(long long int a, long long int b)
 {
@@ -174,5 +175,3 @@ void replace(cache_ARC *arc, long long int page)
 		printf("the second");
 	}
 }
-
-

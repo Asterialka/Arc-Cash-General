@@ -2,6 +2,9 @@
 
 #include <stdlib.h>
 
+#include "list.h"
+#include "hash.h"
+
 typedef struct cache_ARC cache_ARC;
 
 struct cache_ARC
