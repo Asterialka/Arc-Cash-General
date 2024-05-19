@@ -1,5 +1,3 @@
-#pragma once
-
 #include <stdlib.h>
 
 #include "list.h"
@@ -23,6 +21,6 @@ cache_ARC* init_cache(int size_of_cache); /* initializes ARC cache with size_of_
 
 void free_cache(cache_ARC *cache); /* free cache */
 
-void ARC(cache_ARC *ARC, long long int page); /* the main function of cache */
+cache_ARC* ARC(cache_ARC *ARC, long long int page); /* the main function of cache */
 
 void replace(cache_ARC *arc, long long int page); /* special replace function */

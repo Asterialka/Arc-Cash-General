@@ -1,16 +1,20 @@
 #ifndef HASH_TABLE
 #define HASH_TABLE
 
+
 typedef struct hashnode hashnode;
 typedef struct Hash Hash;
-typedef struct node node;
 
+#ifndef CURSED_NODE
+#define CURSED_NODE
+typedef struct node node;
 struct node
 {
     int val;
-    node *next;
-    node *prev;
+    node * next;
+    node * prev;
 };
+#endif
 
 struct hashnode
 {
