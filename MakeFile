@@ -8,9 +8,6 @@ ifeq (,$(wildcard ./$(BUILD_DIR)))
 	mkdir $(BUILD_DIR)
 endif
 
-
-
-
 configure: $(BUILD_DIR)/list.o $(BUILD_DIR)/cache.o $(BUILD_DIR)/hash.o
 	@echo "Configured successfully"
 
