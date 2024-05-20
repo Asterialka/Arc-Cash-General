@@ -4,8 +4,7 @@
 #include <assert.h>
 
 
-void generate(int cache_size, int n_size, int max_page, const char* filename)
-{
+void generate(int cache_size, int n_size, int max_page, const char* filename){
     FILE *file = fopen(filename, "w");
 	srand(time(NULL));
 

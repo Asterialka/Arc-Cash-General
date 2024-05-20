@@ -24,14 +24,13 @@ void contest(FILE *stream)
     while (!feof(stream))
     {
         fscanf(stream, "%d", &i);
-        printf("%d\n", i);
         ARC(arc, i, &p, &hit);
     }
 
     end_t = clock();
-    slow_t = ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
+    slow_t =( ((double)(end_t - start_t)) * 1000000.0 )/ (double)CLOCKS_PER_SEC ;
 
-    printf("Time spent %lg seconds\n", slow_t);
+    printf("Time spent %lg microseconds\n", slow_t);
     printf("%d - number of hits", hit);
     free_cache(arc);
 

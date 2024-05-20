@@ -69,14 +69,14 @@ void replace(cache_ARC *arc, long long int page, int *p)
         popBack(arc->T1);
         hash_delete_elem(arc->T1->tail->val, arc->hash_ARC);
         pushFront(arc->B1, page);
-        printf("the first");
+        //printf("the first");
     }
     else
     {
         popBack(arc->T2);
         hash_delete_elem(arc->T2->tail->val, arc->hash_ARC);
         pushFront(arc->B2, page);
-        printf("the second");
+        //printf("the second");
     }
 }
 
@@ -144,8 +144,8 @@ cache_ARC* ARC(cache_ARC *ARC, long long int page, int *p, int *hit)
             }
             else
             {
-                hash_delete_elem(ARC->T1->tail->val, ARC->hash_ARC);
                 popBack(ARC->T1);
+                hash_delete_elem(ARC->T1->tail->val, ARC->hash_ARC);
                 //printf("case 1.2\n");
             }
         }
