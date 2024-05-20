@@ -19,4 +19,4 @@ $(PREF_OBJ)/%.o : $(PREF_SRC)/%.c
 	$(CC) $(HEADERS) $(CFLAGS) -c $^ -o $@
 
 clean :
-	del /f $(PREF_OBJ)\*.o test.exe
+	del /f $(PREF_OBJ)\*.o *.exe
