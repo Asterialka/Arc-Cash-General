@@ -22,5 +22,5 @@ $(BUILD_DIR)/cache.o: ARC_cache/cache.c
 $(BUILD_DIR)/list.o: ARC_cache/list.c
 	g++ $< -c -o $@
 
-$(BUILD_DIR)/hash.o: ARC_cache/hash.cpp
+$(BUILD_DIR)/hash.o: ARC_cache/hash.c
 	g++ $< -c -o $@
