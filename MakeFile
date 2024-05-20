@@ -1,26 +1,22 @@
-BUILD_DIR=build
-DEPENDENCIES=$(BUILD_DIR)/list.o $(BUILD_DIR)/hash.o $(BUILD_DIR)/cache.o ARC_cache/cache.h ARC_cache/hash.h ARC_cache/list.h
+TARGET=test.exe
+CC=gcc
 
-all: makeDirs configure
+HEADERS=-I./headers/
 
-makeDirs:
-ifeq (,$(wildcard ./$(BUILD_DIR)))
-	mkdir $(BUILD_DIR)
-endif
+PREF_SRC=src
+PREF_OBJ=build
 
-configure: $(BUILD_DIR)/list.o $(BUILD_DIR)/cache.o $(BUILD_DIR)/hash.o
-	@echo "Configured successfully"
+SRC = $(wildcard $(PREF_SRC)/*.c)
+OBJ = $(patsubst $(PREF_SRC)/%.c, $(PREF_OBJ)/%.o, $(SRC))
 
+release : CFLAGS=-Wno-narrowing -Wno-pointer-arith -O0 -g
+release : $(TARGET)
 
-cache.exe: $(DEPENDENCIES)
-	g++ $^ -o $@
+$(TARGET) : $(OBJ)
+	$(CC) $(HEADERS) $(CFLAGS) $^ -o $@
 
+$(PREF_OBJ)/%.o : $(PREF_SRC)/%.c
+	$(CC) $(HEADERS) $(CFLAGS) -c $^ -o $@
 
-$(BUILD_DIR)/cache.o: ARC_cache/cache.c
-	g++ $< -c -o $@
-
-$(BUILD_DIR)/list.o: ARC_cache/list.c
-	g++ $< -c -o $@
-
-$(BUILD_DIR)/hash.o: ARC_cache/hash.c
-	g++ $< -c -o $@
+clean :
+	del /f $(PREF_OBJ)\*.o test.exe
